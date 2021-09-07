@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Xunit;
 
 namespace MyApp.Tests
@@ -74,5 +75,75 @@ namespace MyApp.Tests
             // Assert
             Assert.True(test);
         }
+
+
+        [Fact]
+        public void TestLeapYear_user_input_is_leapyear()
+        {
+            // Arrange
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            Console.SetIn(new StringReader("4"));
+
+            // Act
+            Program.Main(new string[0]);
+            
+            var output = writer.GetStringBuilder().ToString().Trim();
+
+            // Assert
+            Assert.Contains("yay", output);
+        }
+        
+        [Fact]
+        public void TestLeapYear_user_input_is_leapyear2()
+        {
+            // Arrange
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            Console.SetIn(new StringReader("800"));
+
+            // Act
+            Program.Main(new string[0]);
+            
+            var output = writer.GetStringBuilder().ToString().Trim();
+
+            // Assert
+            Assert.Contains("yay", output);
+        }
+
+        [Fact]
+        public void TestLeapYear_user_input_is_not_leapyear()
+        {
+            // Arrange
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            Console.SetIn(new StringReader("5"));
+
+            // Act
+            Program.Main(new string[0]);
+            
+            var output = writer.GetStringBuilder().ToString().Trim();
+
+            // Assert
+            Assert.Contains("nay", output);
+        }
+
+        [Fact]
+        public void TestLeapYear_user_input_is_not_leapyear2()
+        {
+            // Arrange
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            Console.SetIn(new StringReader("999"));
+
+            // Act
+            Program.Main(new string[0]);
+            
+            var output = writer.GetStringBuilder().ToString().Trim();
+
+            // Assert
+            Assert.Contains("nay", output);
+        }
+
     }
 }
